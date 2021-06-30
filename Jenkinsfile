@@ -51,9 +51,22 @@ pipeline {
 			steps {
 				script {
 					docker.withRegistry("","dockerhub"){
+						try{
+							dockerimage.pull();
+						}
+						catch{
 						dockerimage.push();
+						}
 						
 					}
+				}
+			}
+		}
+
+		stage("Terraform") {
+			steps{
+				script{
+					dockerimage.withRun(version)
 				}
 			}
 		}
