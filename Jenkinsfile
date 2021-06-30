@@ -17,7 +17,7 @@
 //DECLARATIVE PIPELINE
 
 pipeline {
-	agent { docker { image 'hashicorp/terraform' } }
+	agent { docker { image 'hashicorp/terraform:light' } }
 	stages {
 		stage('Build') {
 			steps {
