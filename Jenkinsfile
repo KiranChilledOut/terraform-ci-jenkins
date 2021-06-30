@@ -17,31 +17,44 @@
 //DECLARATIVE PIPELINE
 
 pipeline {
-	agent { docker { 
-		image 'hashicorp/terraform:light' 
-		args  '--entrypoint="" -u root'
-		} }
+	agent any
+	// agent { docker { image 'maven:3.6.3' } }
+	environment{
+		dockerHome = tool 'myDocker'
+	}
 	stages {
-		stage('Build') {
+		stage('Checkout') {
 			steps {
-				sh "terraform --version"
-				echo "Build"
+				
+				echo "Checkout"
+				sh "docker --version"
 				echo "$PATH"
 				echo "Build number = $env.BUILD_NUMBER"
 				echo "build Job = $env.JOB_NAME"
 				echo "Build Tag = $env.BUILD_TAG"
 				echo "Build ID= $env.BUILD_ID"
 				echo "${env.BUILD_URL}"
+
 			}
 		}
-		stage('Test') {
+
+		stage('Build Docker Image') {
 			steps {
-				echo "Test"
+				// docker build -t chilledout/jenkins-ci-cd:$env:BUILD_TAG
+				script{
+					dockerimage=docker.build("chilledout/jenkins-cicd-terraform:${env:BUILD_TAG}")
+				}
 			}
 		}
-		stage('Integration Test') {
+
+		stage('Push Docker Image') {
 			steps {
-				echo "Integration Test"
+				script {
+					docker.withRegistry("","dockerhub"){
+						dockerimage.push();
+						
+					}
+				}
 			}
 		}
 	}
