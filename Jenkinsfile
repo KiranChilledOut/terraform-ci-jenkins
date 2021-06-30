@@ -49,7 +49,7 @@ pipeline {
 		stage("Terraform") {
 			steps{
 				script{
-					dockerimage.withRun(version)
+					docker.image("chilledout/jenkins-cicd-terraform:${env:BUILD_TAG}").withRun(version)
 				}
 			}
 		}
