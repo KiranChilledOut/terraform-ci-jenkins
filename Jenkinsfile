@@ -26,11 +26,12 @@ pipeline {
 			steps {
 				sh "terraform --version"
 				echo "Build"
-				echo "${env.BUILD_NUMBER}"
-				echo "${env.JOB_NAME}"
-				echo "${env.BUILD_TAG}"
-				echo "${env.BUILD_ID}"
-				echo "${env.BUILD_URL"
+				echo "$PATH"
+				echo "Build number = $env.BUILD_NUMBER"
+				echo "build Job = $env.JOB_NAME"
+				echo "Build Tag = $env.BUILD_TAG"
+				echo "Build ID= $env.BUILD_ID"
+				echo "${env.BUILD_URL}"
 			}
 		}
 		stage('Test') {
