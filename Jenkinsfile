@@ -19,7 +19,7 @@
 pipeline {
 	agent { docker { 
 		image 'hashicorp/terraform:light' 
-		args  '--entrypoint="/bin/terraform" -u root'
+		args  '--entrypoint="" -u root'
 		} }
 	stages {
 		stage('Build') {
