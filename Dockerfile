@@ -1,5 +1,5 @@
   
-FROM hashicorp/terraform:light
+FROM hashicorp/terraform:latest
 
 RUN \
   apk update && \
