@@ -17,7 +17,10 @@
 //DECLARATIVE PIPELINE
 
 pipeline {
-	agent { docker { image 'hashicorp/terraform:light' } }
+	agent { docker { 
+		image 'hashicorp/terraform:light' 
+		args  '--entrypoint="/bin/terraform" -u root
+		} }
 	stages {
 		stage('Build') {
 			steps {
