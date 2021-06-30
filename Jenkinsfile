@@ -46,23 +46,6 @@ pipeline {
 				}
 			}
 		}
-
-		stage('Push Docker Image') {
-			steps {
-				script {
-					docker.withRegistry("","dockerhub"){
-						try{
-							dockerimage.pull();
-						}
-						catch{
-						dockerimage.push();
-						}
-						
-					}
-				}
-			}
-		}
-
 		stage("Terraform") {
 			steps{
 				script{
@@ -70,6 +53,20 @@ pipeline {
 				}
 			}
 		}
+		// stage('Push Docker Image') {
+		// 	steps {
+		// 		script {
+		// 			docker.withRegistry("","dockerhub"){
+					
+		// 				dockerimage.push();
+						
+						
+		// 			}
+		// 		}
+		// 	}
+		// }
+
+		
 	}
 	post {
 		always {
