@@ -38,14 +38,14 @@ pipeline {
 			}
 		}
 
-		stage('Build Docker Image') {
-			steps {
-				// docker build -t chilledout/jenkins-ci-cd:$env:BUILD_TAG
-				script{
-					dockerimage=docker.build("chilledout/jenkins-cicd-terraform:${env:BUILD_TAG}")
-				}
-			}
-		}
+		// stage('Build Docker Image') {
+		// 	steps {
+		// 		// docker build -t chilledout/jenkins-ci-cd:$env:BUILD_TAG
+		// 		script{
+		// 			dockerimage=docker.build("chilledout/jenkins-cicd-terraform:${env:BUILD_TAG}")
+		// 		}
+		// 	}
+		// }
 		stage("Terraform") {
 			steps{
 				script{
